@@ -9,9 +9,10 @@ https://docs.djangoproject.com/en/1.9/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.9/ref/settings/
 """
-import xadmin
+SECRET_KEY = '6i6*mlk-mx%04nkngjjbgoc*vai(wvlz-antt2&kz$(1t0i&yz'
 
 import os
+import xadmin
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -21,7 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '6i6*mlk-mx%04nkngjjbgoc*vai(wvlz-antt2&kz$(1t0i&yz'
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -46,12 +47,13 @@ INSTALLED_APPS = [
     'story',
     'login',
     'splash_screen',
-    'welcome'
+    'welcome',
     'contact_us',
     'about_us',
     'dustbin',
     'join_us',
     'feedback',
+
 
 ]
 

@@ -14,5 +14,5 @@ def maps(request):
 	if request.method == 'GET':
 		lat = float(request.GET.get('latitude'))
 		lon = float(request.GET.get('latitude'))
-	for o in Maps.objects.all():
-		dist = 
+	# for o in Maps.objects.all():
+	# 	dist = 

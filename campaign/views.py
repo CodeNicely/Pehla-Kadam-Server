@@ -30,7 +30,7 @@ def campaign(request):
 
                                 temp_json['id']= x.id
                                 temp_json['name']=x.name_english
-                                temp_json['date']=x.date
+                                temp_json['date']=str(x.date)
                                 temp_json['description']=x.description_english
                                 temp_json['image']=x.image
 
@@ -54,7 +54,7 @@ def campaign(request):
 
                                 temp_json['id'] = x.id
                                 temp_json['name'] = x.name_english
-                                temp_json['date'] = x.date
+                                temp_json['date'] = str(x.date)
                                 temp_json['description'] = x.description_english
                                 temp_json['image'] = x.image
 

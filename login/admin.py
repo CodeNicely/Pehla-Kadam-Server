@@ -6,6 +6,7 @@ from .models import *
 
 
 # Register your models here.
+
 class OtpDataAdmin(object):
     list_display = ["id", "mobile", "otp", "flag",'modified','created']
 
