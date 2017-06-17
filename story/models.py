@@ -5,23 +5,22 @@ from login.models import UserData
 
 
 
-# Create your models here.
 
 
 class StoryData(models.Model):
-    user_id = models.ForeignKey(UserData,db_column="id")
+    user_id = models.ForeignKey(UserData)
     date = models.DateField(auto_now_add=True)
     time = models.TimeField(auto_now_add=True)
     image = models.ImageField(upload_to='media/story/images/')
-    title = models.CharField(max_length=120)
-    description = models.CharField(max_length=120)
+    title_english = models.CharField(max_length=120,null=True,blank=True)
+    title_hindi = models.CharField(max_length=120,null=True,blank=True)
+    description_english = models.CharField(max_length=120,null=True,blank=True)
+    description_hindi = models.CharField(max_length=120,null=True,blank=True)
     likes = models.IntegerField(default=0)
     shares = models.IntegerField(default=0)
 
-
-
 class UserLikeData(models.Model):
-    user_id = models.ForeignKey(UserData,db_column="id")
-    story_id = models.ForeignKey(StoryData,db_column="id")
+    user_id = models.ForeignKey(UserData)
+    story_id = models.ForeignKey(StoryData)
     liked=models.BooleanField(default=False)
     shared =models.BooleanField(default=False)

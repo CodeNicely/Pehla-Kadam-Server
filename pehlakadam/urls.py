@@ -28,5 +28,7 @@ urlpatterns = [
     url(r'^campaign/', campaign),
     url(r'^image/', gallery_image),
     url(r'^video/', gallery_video),
+    url(r'^video/', gallery_video),
+
 
 ]

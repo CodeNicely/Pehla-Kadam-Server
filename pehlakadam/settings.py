@@ -44,6 +44,10 @@ INSTALLED_APPS = [
     'campaign',
     'gallery',
     'story',
+    'login',
+    'welcome',
+    'splash_screen',
+
 ]
 
 MIDDLEWARE_CLASSES = [

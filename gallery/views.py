@@ -18,7 +18,7 @@ def gallery_image(request):
                 for x in image_list:
                     temp_json={}
                     temp_json['id']= x.id
-                    temp_json['image']=x.image
+                    temp_json['image']=request.scheme + '://' + request.get_host() + '/media/shop/' + str(x.image)
 
                     if lang_type==0:
                         temp_json['caption']=x.caption_english
@@ -51,7 +51,7 @@ def gallery_video(request):
                 for x in image_list:
                     temp_json = {}
                     temp_json['id'] = x.id
-                    temp_json['image'] = x.video
+                    temp_json['video'] = request.scheme + '://' + request.get_host() + '/media/shop/' + str(x.video)
 
                     if lang_type == 0:
                         temp_json['caption'] = x.caption_english
