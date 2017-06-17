@@ -19,8 +19,14 @@ import xadmin
 from django.conf.urls import url
 from django.contrib import admin
 from xadmin.plugins import xversion
+from campaign.views import campaign
+from gallery.views import gallery_image,gallery_video
 xversion.register_models()
 
 urlpatterns = [
     url(r'^admin/', xadmin.site.urls),
+    url(r'^campaign/', campaign),
+    url(r'^image/', gallery_image),
+    url(r'^video/', gallery_video),
+
 ]

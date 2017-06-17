@@ -41,6 +41,18 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'campaign',
+    'gallery',
+    'story',
+    'login',
+    'splash_screen',
+    'welcome'
+    'contact_us',
+    'about_us',
+    'dustbin',
+    'join_us',
+    'feedback',
+
 ]
 
 MIDDLEWARE_CLASSES = [
