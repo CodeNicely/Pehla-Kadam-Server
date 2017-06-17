@@ -5,7 +5,7 @@ import jwt
 from django.views.decorators.csrf import csrf_exempt
 from .models import StoryData, UserLikeData
 from login.models import UserData
-
+from datetime import date,timedelta
 # Create your views here.
 
 @csrf_exempt
@@ -21,7 +21,8 @@ def stories(request):
             access_token = request.GET.get('access_token')
             json = jwt.decode(str(access_token), '810810', algorithms=['HS256'])
 
-
+            today = date.today()
+            yesterday = today - timedelta(days=1)
 
             response_array=[]
 
@@ -32,10 +33,15 @@ def stories(request):
                     obj = UserData.objects.get(id=x.user_id)
                     temp_json['user_id'] = obj.id
                     temp_json['user_name']=obj.name
-                    temp_json['user_image']= request.scheme + '://' + request.get_host() + '/media/shop/' + str(obj.image)
+                    temp_json['user_image']= request.scheme + '://' + request.get_host() + '/media/' + str(obj.image)
 
-                    temp_json['date']=x.date
-                    temp_json['time']=x.time
+                    if x.date == today:
+                        temp_json['date']="Today"
+                    if x.date == yesterday:
+                        temp_json['date']="Yesterday"
+                    else:
+                        temp_json['date']=str(x.date)
+                    temp_json['time']=str(x.time)
                     temp_json['likes']=x.likes
                     temp_json['shares']=x.shares
                     o = UserLikeData.objects.get(user_id = x.user_id, story_id = x.id )
