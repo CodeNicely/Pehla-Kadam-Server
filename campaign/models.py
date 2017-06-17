@@ -7,13 +7,16 @@ from django.db import models
 
 class CampaignData(models.Model):
 	id = models.AutoField(primary_key=True)
-	name_english = models.CharField(max_length=120)
-	name_hindi = models.CharField(max_length=120)
+	name_english = models.CharField(max_length=50,null=True,blank=True)
+	name_hindi = models.CharField(max_length=50,null=True,blank=True)
 	date = models.DateField(auto_now_add=True)
-	venue_engilsh = models.CharField(max_length=120)
-	venue_hindi = models.CharField(max_length=120)
-	description_english = models.TextField()
-	description_hindi = models.TextField()
+	venue_engilsh = models.CharField(max_length=120,null=True,blank=True)
+	venue_hindi = models.CharField(max_length=120,null=True ,blank=True)
+	description_english = models.TextField(null=True,blank=True)
+	description_hindi = models.TextField(null=True,blank=True)
 	image = models.ImageField(upload_to='media/campaign_images', blank=True)
+
+	def __unicode__(self):
+		return str(self.id)
 
 
