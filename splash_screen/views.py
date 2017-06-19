@@ -1,10 +1,11 @@
+from __future__ import print_function
 from django.shortcuts import render
 
 # Create your views here.
 from django.http import JsonResponse
 
 from .models import *
-from __future__ import print_function
+
 
 
 def splash_screen(request):

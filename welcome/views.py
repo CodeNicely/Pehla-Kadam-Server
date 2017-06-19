@@ -1,7 +1,8 @@
+from __future__ import print_function
 from django.shortcuts import render
 
 # Create your views here.
-from __future__ import print_function
+
 
 from django.http import JsonResponse
 
@@ -21,20 +22,20 @@ def welcome(request):
 
         	if lang == '0':
 		        for o in WelcomeData.objects.all():
-		            welcome_details = {'id': str(o.id),
+		        	welcome_details = {'id': str(o.id),
 		                               'image': request.scheme + '://' + request.get_host() + '/media/' + str(o.image),
 		                               'quote': str(o.quote_english)
 		                               }
-		            slider_list.append(welcome_details)
+		        	slider_list.append(welcome_details)
 		        response_json['success'] = True
 		        response_json['message'] = 'Successful'
 		        response_json['welcome_page'] = slider_list
-				for s in WardData.objects.all():
+
+		        for s in WardData.objects.all():
 					ward_details = {'id': int(s.id),
-									'name': str(o.ward_name_hindi)
-								   
+									'name': str(o.ward_name_hindi)								   
 					        	}
-		        	ward_list.append(ward_details)
+					ward_list.append(ward_details)
 	        	response_json['ward_list'] = ward_list
 	        if lang == '1':
 		        for o in WelcomeData.objects.all():

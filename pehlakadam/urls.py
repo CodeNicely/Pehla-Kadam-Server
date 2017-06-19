@@ -25,22 +25,23 @@ from story.views import like,share,stories
 from login.views import login
 from splash_screen.views import splash_screen
 from welcome.views import welcome
+from django.conf.urls.static import static
+from django.conf import settings
 xversion.register_models()
 
 urlpatterns = [
     url(r'^admin/', xadmin.site.urls),
     url(r'^campaign/', campaign),
-    url(r'^image/', gallery_image),
-    url(r'^video/', gallery_video),
+    url(r'^gallery_image/', gallery_image),
+    url(r'^gallery_video/', gallery_video),
     url(r'^like/', like),
     url(r'^share/', share),
-    url('r^stories',stories),
+    url(r'^stories/',stories),
     url(r'^login/', login),
     url(r'^splash_screen/', splash_screen),
     url(r'^welcome/', welcome),
 
-
-
-
-
 ]
+
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

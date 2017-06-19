@@ -1,15 +1,13 @@
+from __future__ import print_function
+from __future__ import print_function
 from django.shortcuts import render
-
-from __future__ import print_function
-from __future__ import print_function
-
 from random import randint
 
 import jwt
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
-from sms import send_sms1
+
 
 from .models import *
 
