@@ -9,7 +9,7 @@ class KeysData(models.Model):
     modified = models.DateTimeField(auto_now=True, auto_now_add=False)
     created = models.DateTimeField(auto_now=False, auto_now_add=True)
 class FcmData(models.Model):
-    fcm = models.CharField(max_length=255, unique=True)
+    fcm = models.CharField(max_length=255, unique=True,null=True,blank=True)
   
     modified = models.DateTimeField(auto_now=True, auto_now_add=False)
     created = models.DateTimeField(auto_now=False, auto_now_add=True)

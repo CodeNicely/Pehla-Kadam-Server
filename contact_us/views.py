@@ -1,10 +1,13 @@
+
+
+from __future__ import print_function
 from django.shortcuts import render
 
 # Create your views here.
 from django.http import JsonResponse
 
 from .models import *
-from __future__ import print_function
+
 from django.views.decorators.csrf import csrf_exempt
 from splash_screen.models import ImageData
 	
