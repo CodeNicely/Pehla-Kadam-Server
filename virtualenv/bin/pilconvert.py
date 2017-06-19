@@ -15,12 +15,10 @@
 
 from __future__ import print_function
 
-import getopt
-import string
-import sys
+import site
+import getopt, string, sys
 
 from PIL import Image
-
 
 def usage():
     print("PIL Convert 0.5/1998-12-30 -- convert image files")
@@ -49,10 +47,10 @@ except getopt.error as v:
     print(v)
     sys.exit(1)
 
-output_format = None
+format = None
 convert = None
 
-options = {}
+options = { }
 
 for o, a in opt:
 
@@ -68,7 +66,7 @@ for o, a in opt:
         sys.exit(1)
 
     elif o == "-c":
-        output_format = a
+        format = a
 
     if o == "-g":
         convert = "L"
@@ -90,8 +88,8 @@ try:
     if convert and im.mode != convert:
         im.draft(convert, im.size)
         im = im.convert(convert)
-    if output_format:
-        im.save(argv[1], output_format, **options)
+    if format:
+        im.save(argv[1], format, **options)
     else:
         im.save(argv[1], **options)
 except:

@@ -1,16 +1,21 @@
 from django.contrib import admin
 
-# Register your models here.
 import xadmin
-from login.models import UserData
+
+from .models import *
 
 
-class UserDataModel(object):
+# Register your models here.
 
-    list_display=["id"]
+class OtpDataAdmin(object):
+    list_display = ["id", "mobile", "otp", "flag",'modified','created']
 
 
-    class Meta:
-        model = UserData
+xadmin.site.register(OtpData,OtpDataAdmin)
 
-xadmin.site.register(UserData,UserDataModel)
+class UserDataAdmin(object):
+    list_display = ["id", "name", "mobile",'ward','fcm','image','modified','created']
+
+
+xadmin.site.register(UserData, UserDataAdmin)
+

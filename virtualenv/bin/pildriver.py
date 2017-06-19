@@ -52,8 +52,7 @@ from __future__ import print_function
 
 from PIL import Image
 
-
-class PILDriver(object):
+class PILDriver:
 
     verbose = 0
 
@@ -70,7 +69,7 @@ class PILDriver(object):
 
     def push(self, item):
         "Push an argument onto the evaluation stack."
-        self.stack.insert(0, item)
+        self.stack = [item] + self.stack
 
     def top(self):
         "Return the top-of-stack element."
@@ -90,7 +89,9 @@ class PILDriver(object):
 
         Discard the top element on the stack.
         """
-        return self.stack.pop(0)
+        top = self.stack[0]
+        self.stack = self.stack[1:]
+        return top
 
     def do_dup(self):
         """usage: dup
@@ -101,7 +102,7 @@ class PILDriver(object):
             dup = self.stack[0].copy()
         else:
             dup = self.stack[0]
-        self.push(dup)
+        self.stack = [dup] + self.stack
 
     def do_swap(self):
         """usage: swap
@@ -150,8 +151,7 @@ class PILDriver(object):
         self.push(Image.composite(image1, image2, mask))
 
     def do_merge(self):
-        """usage: merge <string:mode> <image:pic1>
-                        [<image:pic2> [<image:pic3> [<image:pic4>]]]
+        """usage: merge <string:mode> <image:pic1> [<image:pic2> [<image:pic3> [<image:pic4>]]]
 
         Merge top-of stack images in a way described by the mode.
         """
@@ -180,8 +180,7 @@ class PILDriver(object):
         self.dup()
 
     def do_crop(self):
-        """usage: crop <int:left> <int:upper> <int:right> <int:lower>
-                       <image:pic1>
+        """usage: crop <int:left> <int:upper> <int:right> <int:lower> <image:pic1>
 
         Crop and push a rectangular region from the current image.
         """
@@ -208,9 +207,9 @@ class PILDriver(object):
         Process the top image with the given filter.
         """
         from PIL import ImageFilter
-        imageFilter = getattr(ImageFilter, self.do_pop().upper())
+        filter = eval("ImageFilter." + self.do_pop().upper())
         image = self.do_pop()
-        self.push(image.filter(imageFilter))
+        self.push(image.filter(filter))
 
     def do_getbbox(self):
         """usage: getbbox
@@ -243,8 +242,7 @@ class PILDriver(object):
         self.push(image.offset(xoff, yoff))
 
     def do_paste(self):
-        """usage: paste <image:figure> <int:xoffset> <int:yoffset>
-                        <image:ground>
+        """usage: paste <image:figure> <int:xoffset> <int:yoffset> <image:ground>
 
         Paste figure image into ground with upper left at given offsets.
         """
@@ -488,7 +486,7 @@ class PILDriver(object):
                 print("Stack: " + repr(self.stack))
             top = self.top()
             if not isinstance(top, str):
-                continue
+                continue;
             funcname = "do_" + top
             if not hasattr(self, funcname):
                 continue
@@ -499,6 +497,10 @@ class PILDriver(object):
 
 if __name__ == '__main__':
     import sys
+    try:
+        import readline
+    except ImportError:
+        pass # not available on all platforms
 
     # If we see command-line arguments, interpret them as a stack state
     # and execute.  Otherwise go interactive.
@@ -511,9 +513,9 @@ if __name__ == '__main__':
         while True:
             try:
                 if sys.version_info[0] >= 3:
-                    line = input('pildriver> ')
+                    line = input('pildriver> ');
                 else:
-                    line = raw_input('pildriver> ')
+                    line = raw_input('pildriver> ');
             except EOFError:
                 print("\nPILDriver says goodbye.")
                 break
