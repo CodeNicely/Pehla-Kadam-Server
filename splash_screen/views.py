@@ -6,23 +6,35 @@ from django.http import JsonResponse
 
 from .models import *
 
+
 from login.models import UserData
+from django.views.decorators.csrf import csrf_exempt
+
+import jwt
 
 
+
+
+@csrf_exempt
 def splash_screen(request):
     response_json = {}
     if request.method == 'GET':
         try:
-            access_token = request.GET.get('access_token')
+            access_token1 = request.GET.get('access_token')
+            access_token = str(access_token1)
             fcm = request.GET.get('fcm')
-            if access_token is None:
-                p, created = FcmData.objects.get_or_create(fcm=fcm)
-            print ('a')
-            if created:
-                response_json['message'] = "fcm added"
-            if not created:
-                response_json['message'] = "fcm already exsists"
-            else:
+            print('aaaa')
+            print(fcm)
+            print(access_token)
+            if access_token == '1' :
+                print('b')
+                p,created = FcmData.objects.get_or_create(fcm=fcm)
+                print ('aman---------')
+                if created:
+                    response_json['message'] = "fcm added"
+                if not created:
+                    response_json['message'] = "fcm already exsists"
+            else :
                 json = jwt.decode(str(access_token), str(KeysData.objects.get(key='jwt').value), algorithms=['HS256'])
                 mobile = str(json['mobile'])
                 user_row = UserData.objects.get(mobile= mobile)
@@ -30,7 +42,9 @@ def splash_screen(request):
                 user_row.save()
                 response_json['message'] = 'fcm linked to user'
 
+
             version = int(KeysData.objects.get(key='version').value)
+            print(version)
             print ('a2')
             compulsory_update = KeysData.objects.get(key='compulsory_update').value
             print ('a5')

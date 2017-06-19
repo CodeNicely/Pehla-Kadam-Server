@@ -1,9 +1,11 @@
+
+from __future__ import print_function
 from django.shortcuts import render
 
 from django.http import JsonResponse
 
 from .models import *
-from __future__ import print_function
+
 from django.views.decorators.csrf import csrf_exempt
 from splash_screen.models import ImageData
 	
@@ -22,7 +24,7 @@ def about_us(request):
 					detail['description'] = o.description_english
 					detail_list.append(detail)
 				image_link = ImageData.objects.get(key='about_us').image
-				image = request.scheme + '://' + request.get_host() + '/media/' + str(o.image_link)
+				image = request.scheme + '://' + request.get_host() + '/media/' + str(image_link)
 				response_json['image'] = image
 				response_json['success'] = True
 				response_json['message'] = 'Successful'
