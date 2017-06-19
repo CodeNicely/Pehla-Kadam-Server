@@ -21,6 +21,8 @@ from django.contrib import admin
 from xadmin.plugins import xversion
 from campaign.views import campaign
 from gallery.views import gallery_image,gallery_video
+
+
 from login.views import login
 from django.conf import settings
 from django.conf.urls.static import static
@@ -30,17 +32,21 @@ from splash_screen.views import splash_screen
 from contact_us.views import contact_us
 from feedback.views import feedback
 from join_us.views import join_us
+from story.views import stories,like,share
 xversion.register_models()
 
 urlpatterns = [
     url(r'^admin/', xadmin.site.urls),
     url(r'^campaign/', campaign),
-    url(r'^image/', gallery_image),
-    url(r'^video/', gallery_video),
-    url(r'^about_us/', about_us),
+    url(r'^gallery_image/', gallery_image),
+    url(r'^gallery_video/', gallery_video),
+    url(r'^like/', like),
+    url(r'^share/', share),
+    url(r'^stories/',stories),
     url(r'^login/', login),
-    url(r'^welcome/',welcome),
-    url(r'^splash_screen/',splash_screen),
+    url(r'^splash_screen/', splash_screen),
+    url(r'^welcome/', welcome),
+    url(r'^about_us/', about_us),   
     url(r'^contact_us/',contact_us),
     url(r'^feedback/',feedback),
     url(r'^join_us/',join_us),
