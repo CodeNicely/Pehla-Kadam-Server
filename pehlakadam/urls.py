@@ -33,6 +33,7 @@ from contact_us.views import contact_us
 from feedback.views import feedback
 from join_us.views import join_us
 from story.views import stories,like,share
+from dustbin.views import maps
 xversion.register_models()
 
 urlpatterns = [
@@ -51,6 +52,7 @@ urlpatterns = [
     url(r'^contact_us/',contact_us),
     url(r'^feedback/',feedback),
     url(r'^join_us/',join_us),
+    url(r'^dustbin/',maps),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
