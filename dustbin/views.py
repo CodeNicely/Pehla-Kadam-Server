@@ -17,25 +17,27 @@ def maps(request):
 	temp_list = []
 	if request.method == 'GET':
 		try:
-			lat = float(request.GET.get('latitude'))
-			lon = float(request.GET.get('latitude'))
-			for o in Maps.objects.all():
-				try:
+			latitude = float(request.GET.get('latitude'))
+			longitude = float(request.GET.get('latitude'))
+			try:
+				for o in DustBinData.objects.all():
+				
 					distance = get_distance(np.float32(latitude), np.float32(longitude),
 					np.float32(o.latitude), np.float32(o.longitude))
+					temp_json = {}
 					temp_json['distance'] = distance
 					temp_json['latitude'] = o.latitude
 					temp_json['longitude'] = o.longitude
 					temp_json['name'] = o.location
-					
-					response_json['dustbin_list'].append(temp_json)
-					response_json['success'] = True
-					response_json['message'] = "Successful"
-					response_json["dustbin_list"] = sorted(response_json["dustbin_list"], key=lambda x: x['distance'], reverse=False)
-				except Exception as e :
-					print(str(e))
-					response_json['success'] = False
-					response_json['message'] = str(e)
+					temp_list.append(temp_json)
+				response_json['dustbin_list'] = temp_list
+				response_json['success'] = True
+				response_json['message'] = "Successful"
+				response_json["dustbin_list"] = sorted(response_json["dustbin_list"], key=lambda x: x['distance'], reverse=False)
+			except Exception as e :
+				print(str(e))
+				response_json['success'] = False
+				response_json['message'] = str(e)
 
 		except Exception as e :
 			print(str(e))
