@@ -33,11 +33,12 @@ from contact_us.views import contact_us
 from feedback.views import feedback
 from join_us.views import join_us
 from story.views import stories,like,share
+from admin_panel.views import home
 xversion.register_models()
 
 urlpatterns = [
     url(r'^admin/', xadmin.site.urls),
-    url(r'^', campaign),
+    url(r'^home/',home),
     url(r'^campaign/', campaign),
     url(r'^gallery_image/', gallery_image),
     url(r'^gallery_video/', gallery_video),

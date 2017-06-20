@@ -9,12 +9,15 @@ from .models import *
 
 from django.views.decorators.csrf import csrf_exempt
 from login.models import UserData
+import jwt
+from splash_screen.models import KeysData
 
 	
 @csrf_exempt
 def feedback(request):
+	response_json = {}
 	if request.method == 'GET':
-		response_json = {}
+	
 		try:
 			access_token = request.GET.get('access_token')
 			feedback_receive = request.GET.get('feedback')

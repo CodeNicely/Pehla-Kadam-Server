@@ -9,7 +9,7 @@ from .models import *
 
 # Register your models here.
 class ContactUsDataAdmin(object):
-    list_display = ["id","name_hindi","name_english","mobile","email","address_hindi","address_english"]
+    list_display = ["id","mobile","email","address_hindi","address_english","facebook"]
 
 
 xadmin.site.register(ContactUsData,ContactUsDataAdmin)

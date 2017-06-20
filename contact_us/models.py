@@ -7,6 +7,6 @@ class ContactUsData(models.Model):
     mobile = models.CharField(max_length=120, blank=True, null=True)
     address_hindi = models.CharField(max_length=200, blank=True, null=True)
     address_english= models.CharField(max_length=200, blank=True, null=True)
-    name_hindi = models.CharField(max_length=120, blank=True, null=True)
-    name_english = models.CharField(max_length=120, blank=True, null=True)
+    facebook = models.CharField(max_length=120, blank=True, null=True)
+    
     
