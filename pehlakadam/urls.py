@@ -37,6 +37,7 @@ xversion.register_models()
 
 urlpatterns = [
     url(r'^admin/', xadmin.site.urls),
+    url(r'^', campaign),
     url(r'^campaign/', campaign),
     url(r'^gallery_image/', gallery_image),
     url(r'^gallery_video/', gallery_video),
