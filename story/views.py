@@ -32,7 +32,7 @@ def stories(request):
 
             try:
                 print '2'
-                story_list = StoryData.objects.all(approve=True)
+                story_list = StoryData.objects.filter(approve=True)
                 for x in story_list:
                     print 'xtime',x.time
                     print 'xtimehour',x.time.hour
