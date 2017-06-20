@@ -27,7 +27,7 @@ def stories(request):
             response_array=[]
 
             try:
-                story_list = StoryData.objects.all()
+                story_list = StoryData.objects.all(approved=True)
                 for x in story_list:
                     temp_json={}
                     obj = UserData.objects.get(id=x.user_id)
@@ -134,6 +134,7 @@ def stories(request):
         except Exception as e:
             response_json['success'] = False
             response_json['message'] = "Access token not received"
+
 
 
 

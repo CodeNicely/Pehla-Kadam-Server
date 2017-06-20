@@ -18,6 +18,7 @@ class StoryData(models.Model):
     description_hindi = models.CharField(max_length=120,null=True,blank=True)
     likes = models.IntegerField(default=0)
     shares = models.IntegerField(default=0)
+    approved = models.BooleanField(default=False)
 
 class UserLikeData(models.Model):
     user_id = models.ForeignKey(UserData)
