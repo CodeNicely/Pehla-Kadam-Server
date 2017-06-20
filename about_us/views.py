@@ -13,15 +13,18 @@ from splash_screen.models import ImageData
 def about_us(request):
 	if request.method == 'GET':
 		try:
+			print('1')
 			lang = request.GET.get('lang_type')
 			response_json = {}
-			if(lang == '0'):
+			if lang == '0':
 				detail_list = []
 				about_us_list =  AboutUsData.objects.all()
+				print('2')
 				for o in about_us_list:
 					detail={ }
 					detail['title']= o.title_english
 					detail['description'] = o.description_english
+					detail['image'] = request.scheme + '://' + request.get_host() + '/media/' + str(o.image)
 					detail_list.append(detail)
 				image_link = ImageData.objects.get(key='about_us').image
 				image = request.scheme + '://' + request.get_host() + '/media/' + str(image_link)
@@ -29,7 +32,7 @@ def about_us(request):
 				response_json['success'] = True
 				response_json['message'] = 'Successful'
 				response_json['about_us_list'] = detail_list
-			if(lang == '1'):
+			if lang == '1':
 				detail_list = []
 				about_us_list =  AboutUsData.objects.all()
 				for o in about_us_list:

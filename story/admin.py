@@ -2,11 +2,11 @@ from django.contrib import admin
 
 # Register your models here.
 import xadmin
-from .models import StoryData,UserLikeData
+from .models import StoryData,UserLikeData,UserShareData
 
 class StoryDataModel(object):
 
-    list_display=["id","user_id","date","time","likes","shares"]
+    list_display=["id","user_id","user_mobile","date","time","likes","shares"]
 
 
     class Meta:
@@ -23,3 +23,13 @@ class UserLikeDataModel(object):
         model = UserLikeData
 
 xadmin.site.register(UserLikeData,UserLikeDataModel)
+
+class UserShareDataModel(object):
+
+    list_display=["id","user_id","shared"]
+
+
+    class Meta:
+        model = UserShareData
+
+xadmin.site.register(UserShareData,UserShareDataModel)

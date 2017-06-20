@@ -9,7 +9,7 @@ from .models import ImageData,VideoData
 def gallery_image(request):
     response_json = {}
     if request.method == "GET":
-        lang_type = request.POST.get("lang_type")
+        lang_type = request.POST.get("language_type")
         try:
             image_list = ImageData.objects.all()
             response_array=[]
@@ -18,7 +18,7 @@ def gallery_image(request):
                 for x in image_list:
                     temp_json={}
                     temp_json['id']= x.id
-                    temp_json['image']=request.scheme + '://' + request.get_host() + '/media/shop/' + str(x.image)
+                    temp_json['image_url']=request.scheme + '://' + request.get_host() + '/media/'+str(x.image)
 
                     if lang_type==0:
                         temp_json['caption']=x.caption_english
@@ -36,13 +36,15 @@ def gallery_image(request):
             response_json['success'] = False
             response_json['message'] = "ImageData not found"
 
+    print response_json
+
     return JsonResponse(response_json)
 
 
 @csrf_exempt
 def gallery_video(request):
     if request.method == "GET":
-        lang_type = request.POST.get("lang_type")
+        lang_type = request.POST.get("language_type")
         try:
             image_list = VideoData.objects.all()
             response_array = []
@@ -51,7 +53,7 @@ def gallery_video(request):
                 for x in image_list:
                     temp_json = {}
                     temp_json['id'] = x.id
-                    temp_json['video'] = request.scheme + '://' + request.get_host() + '/media/shop/' + str(x.video)
+                    temp_json['video_url'] = request.scheme + '://' + request.get_host() + '/media/' + str(x.video)
 
                     if lang_type == 0:
                         temp_json['caption'] = x.caption_english
@@ -70,6 +72,7 @@ def gallery_video(request):
             response_json['success'] = False
             response_json['message'] = "VideoData not found"
 
+    print response_json
     return JsonResponse(response_json)
 
 

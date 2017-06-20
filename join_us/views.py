@@ -14,12 +14,13 @@ def join_us(request):
 		response_json = {}
 		try:
 			access_token = request.GET.get('lang_type')
+			desc = request.GET.get('description')
 		
 			if access_token is not None :
 				json = jwt.decode(str(access_token), str(KeysData.objects.get(key='jwt').value), algorithms=['HS256'])
 				mobile = str(json['mobile'])
 				user_row = UserData.objects.get(mobile = mobile)
-				JoinUsData.objects.create(name=user_row.name,mobile=user_row.mobile,ward=user_row.ward)
+				JoinUsData.objects.create(name=user_row.name,mobile=user_row.mobile,ward=user_row.ward,description=desc)
 				response_json['success'] = True
 				response_json['message'] = 'Successful'
 			else:

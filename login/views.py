@@ -1,7 +1,6 @@
-
-
 from __future__ import print_function
-
+from __future__ import print_function
+from django.shortcuts import render
 
 from random import randint
 from django.shortcuts import render

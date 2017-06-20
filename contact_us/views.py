@@ -18,37 +18,33 @@ def contact_us(request):
 			lang = request.GET.get('lang_type')
 			response_json = {}
 			if(lang == '0'):
-				detail_list = []
-				contact_us_list =  ContactUsData.objects.all()
-				for o in contact_us_list:
-					detail = { }
-					detail['name'] = o.name_english
-					detail['address'] = o.address_english
-					detail['email'] = o.email
-					detail['mobile'] = o.mobile
-					detail_list.append(detail)
-				# image_link = ImageData.objects.get(key='about_us').image
-				# image = request.scheme + '://' + request.get_host() + '/media/' + str(o.image_link)
-				# response_json['image'] = image
+				
+				o =  ContactUsData.objects.all()
+				response_json['facebook'] = o.facebook
+				response_json['address'] = o.address_english
+				response_json['email'] = o.email
+				response_json['mobile'] = o.mobile
+					
+				image_link = ImageData.objects.get(key='contact_us').image
+				image = request.scheme + '://' + request.get_host() + '/media/' + str(o.image_link)
+				response_json['image'] = image
 				response_json['success'] = True
 				response_json['message'] = 'Successful'
-				response_json['contact_us_list'] = detail_list
+				
 			if(lang == '1'):
-				detail_list = []
-				contact_us_list =  ContactUsData.objects.all()
-				for o in contact_us_list:
-					detail = { }
-					detail['name'] = o.name_hindi
-					detail['address'] = o.address_hindi
-					detail['email'] = o.email
-					detail['mobile'] = o.mobile
-					detail_list.append(detail)
-				# image_link = ImageData.objects.get(key='about_us').image
-				# image = request.scheme + '://' + request.get_host() + '/media/' + str(o.image_link)
-				# response_json['image'] = image
+				
+				o =  ContactUsData.objects.all()
+				response_json['facebook'] = o.facebook
+				response_json['address'] = o.address_hindi
+				response_json['email'] = o.email
+				response_json['mobile'] = o.mobile
+			
+				image_link = ImageData.objects.get(key='contact_us').image
+				image = request.scheme + '://' + request.get_host() + '/media/' + str(o.image_link)
+				response_json['image'] = image
 				response_json['success'] = True
 				response_json['message'] = 'Successful'
-				response_json['contact_us_list'] = detail_list
+				response_json['contact_us_list'] = response_json_list
 				
 		except Exception as e:
 			print(e)

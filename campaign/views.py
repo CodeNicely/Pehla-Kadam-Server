@@ -132,7 +132,7 @@ def campaign(request):
             response_json['success'] = False
             response_json['message'] = "language type incorrect"
 
-
+        print response_json
         return JsonResponse(response_json)
 
 

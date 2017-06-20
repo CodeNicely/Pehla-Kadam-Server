@@ -3,7 +3,6 @@ from django.shortcuts import render
 
 # Create your views here.
 
-
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from .models import *
@@ -19,6 +18,7 @@ def welcome(request):
 		ward_list = []
 		try:
 			lang = request.GET.get('lang_type')
+
 
 			if lang == '0':
 				for o in WelcomeData.objects.all():
@@ -58,6 +58,7 @@ def welcome(request):
 			print(e)
 			response_json['success'] = False
 			response_json['message'] = str(e)
+
 
 	else:
 		response_json['success'] = False
