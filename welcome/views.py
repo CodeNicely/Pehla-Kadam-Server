@@ -32,7 +32,7 @@ def welcome(request):
 				response_json['welcome_page'] = slider_list
 				for s in WardData.objects.all():
 					ward_details = {'id': int(s.id),
-					'name': str(s.ward_name_hindi)
+					'name': str(s.ward_name_english)
 
 					}
 					ward_list.append(ward_details)

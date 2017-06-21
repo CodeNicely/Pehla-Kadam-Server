@@ -10,6 +10,7 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from splash_screen.models import KeysData
 from sms import send_sms1
+from welcome.views import WardData
 
 from .models import *
 
@@ -18,7 +19,7 @@ from .models import *
 def login(request):
 	response_json = {}
 	if request.method == 'GET':
-		for x, y in request.POST.items():
+		for x, y in request.GET.items():
 			print("key,value", x, ":", y)
 		otp = randint(100000, 999999)
 		mobile = str(request.GET.get("mobile"))
@@ -63,4 +64,87 @@ def login(request):
 	return JsonResponse(response_json)
 
 
+
+@csrf_exempt
+def profile(request):
+	response_json = {}
+	if request.method == 'GET':
+		for x, y in request.GET.items():
+			print("key,value", x, ":", y)
+		try:
+			access_token1 = request.GET.get('access_token')
+			lang_type = request.GET.get('lang_type')
+			access_token = str(access_token1)
+			json = jwt.decode(str(access_token), str(KeysData.objects.get(key='jwt').value), algorithms=['HS256'])
+			mobile = str(json['mobile'])
+			user_row = UserData.objects.get(mobile= mobile)
+			response_json['name'] = user_row.name
+			response_json['mobile'] = user_row.mobile
+			response_json['ward'] = user_row.ward
+			response_json['image'] = request.scheme + '://' + request.get_host() + '/media/' + str(user_row.image)
+			if lang_type == '1' :
+				for s in WardData.objects.all():
+					ward_details = {'id': int(s.id),
+					'name': str(s.ward_name_hindi)
+					}
+					ward_list.append(ward_details)
+				response_json['ward_list'] = ward_list
+			if lang_type == '0':
+				for s in WardData.objects.all():
+					ward_details = {'id': int(s.id),
+					'name': str(o.ward_name_hindi)
+					}
+					ward_list.append(ward_details)
+				response_json['ward_list'] = ward_list
+			response_json['success'] = True
+			response_json['mesage'] ="Successful"
+		except Exception as e :
+			print(str(e))
+			response_json['success'] = False
+			response_json['message'] = str(e)
+	print(str(response_json))
+	return JsonResponse(response_json)
+
+	if request.method == 'POST':
+		for x, y in request.POST.items():
+			print("key,value", x, ":", y)
+		try:
+			access_token1 = request.GET.get('access_token')
+			name = request.GET.get('name')
+			ward = request.GET.get('ward')
+			
+
+			access_token = str(access_token1)
+			json = jwt.decode(str(access_token), str(KeysData.objects.get(key='jwt').value), algorithms=['HS256'])
+			mobile = str(json['mobile'])
+			user_row = UserData.objects.get(mobile= mobile)
+			setattr(user_row,'name',name)
+			setattr(user_row,'ward',ward)
+			user_row.save()
+			try:
+				print("inside try")
+				image = request.FILES.get('image').name
+				
+				folder = 'media/' + '/profile/'
+				print("folder")
+				full_filename = os.path.join(folder, image)
+				print("full name", full_filename)
+				print("image=", image)
+				fout = open(folder + image, 'w')
+				print("below fout")
+				file_content = request.FILES.get('image').read()
+				print("below file content")
+				fout.write(file_content)
+				
+				fout.close()
+				
+			except Exception as e:
+				image = 'image'
+				print(e)
+		except Exception as e :
+			print(str(e))
+			response_json['success'] = False
+			response_json['message'] = str(e)
+	print(str(response_json))
+	return JsonResponse(response_json)
 

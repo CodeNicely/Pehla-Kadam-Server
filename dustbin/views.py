@@ -17,13 +17,15 @@ def maps(request):
 	temp_list = []
 	if request.method == 'GET':
 		try:
-			latitude = float(request.GET.get('latitude'))
-			longitude = float(request.GET.get('latitude'))
+			latitude = (request.GET.get('latitude'))
+			longitude = (request.GET.get('longitude'))
 			try:
 				for o in DustBinData.objects.all():
+					print(latitude,longitude,o.latitude,o.longitude)
 				
 					distance = get_distance(np.float32(latitude), np.float32(longitude),
 					np.float32(o.latitude), np.float32(o.longitude))
+					print(distance)
 					temp_json = {}
 					temp_json['distance'] = distance
 					temp_json['latitude'] = o.latitude
@@ -48,12 +50,6 @@ def maps(request):
 		response_json['message'] = "not a get request"
 	print(str(response_json))
 	return JsonResponse(response_json)
-
-
-
-
-
-
 
 
 
