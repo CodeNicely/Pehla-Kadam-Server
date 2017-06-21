@@ -6,7 +6,7 @@ from .models import StoryData,UserLikeData,UserShareData
 
 class StoryDataModel(object):
 
-    list_display=["id","user_id","user_mobile","date","time","likes","shares"]
+    list_display=["id","user_data","date","time","likes","shares","approve"]
 
 
     class Meta:
@@ -16,7 +16,7 @@ xadmin.site.register(StoryData,StoryDataModel)
 
 class UserLikeDataModel(object):
 
-    list_display=["id","user_id","liked"]
+    list_display=["id","user_id","story_id","liked"]
 
 
     class Meta:
@@ -26,7 +26,7 @@ xadmin.site.register(UserLikeData,UserLikeDataModel)
 
 class UserShareDataModel(object):
 
-    list_display=["id","user_id","shared"]
+    list_display=["id","user_id","story_id","shared"]
 
 
     class Meta:

@@ -42,7 +42,7 @@ def splash_screen(request):
                 user_row.save()
                 response_json['message'] = 'fcm linked to user'
 
-
+            print("234")
             version = int(KeysData.objects.get(key='version').value)
             print(version)
             print ('a2')

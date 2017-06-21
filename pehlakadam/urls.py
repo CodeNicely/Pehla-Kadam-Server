@@ -16,7 +16,7 @@ Including another URLconf
 """
 
 import xadmin
-from django.conf.urls import url
+from django.conf.urls import url, include
 from django.contrib import admin
 from xadmin.plugins import xversion
 from campaign.views import campaign
@@ -38,7 +38,7 @@ xversion.register_models()
 
 urlpatterns = [
     url(r'^admin/', xadmin.site.urls),
-
+    url(r'^home/', include("admin_panel.urls")),
     url(r'^campaign/', campaign),
     url(r'^gallery_image/', gallery_image),
     url(r'^gallery_video/', gallery_video),
