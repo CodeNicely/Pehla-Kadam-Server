@@ -19,21 +19,22 @@ def contact_us(request):
 			response_json = {}
 			if(lang == '0'):
 				
-				o =  ContactUsData.objects.all()
+				o =  ContactUsData.objects.first()
 				response_json['facebook'] = o.facebook
 				response_json['address'] = o.address_english
 				response_json['email'] = o.email
 				response_json['mobile'] = o.mobile
-					
+				print('a')	
 				image_link = ImageData.objects.get(key='contact_us').image
-				image = request.scheme + '://' + request.get_host() + '/media/' + str(o.image_link)
+				image = request.scheme + '://' + request.get_host() + '/media/' + str(image_link)
+				print('b')	
 				response_json['image'] = image
 				response_json['success'] = True
 				response_json['message'] = 'Successful'
 				
 			if(lang == '1'):
 				
-				o =  ContactUsData.objects.all()
+				o =  ContactUsData.objects.first()
 				response_json['facebook'] = o.facebook
 				response_json['address'] = o.address_hindi
 				response_json['email'] = o.email

@@ -32,11 +32,11 @@ def campaign(request):
                                 temp_json['name']=x.name_english
                                 temp_json['date']=str(x.date)
                                 temp_json['description']=x.description_english
-                                temp_json['image']=x.image
+                                temp_json['image']= request.scheme + '://' + request.get_host() + '/media/'+str(x.image)
 
                                 response_array.append(temp_json)
 
-                                response_json['past']=response_array
+                                response_json['campaign_list']=response_array
                                 response_json['success'] = True
                                 response_json['message'] = "List found"
 
@@ -56,11 +56,11 @@ def campaign(request):
                                 temp_json['name'] = x.name_english
                                 temp_json['date'] = str(x.date)
                                 temp_json['description'] = x.description_english
-                                temp_json['image'] = x.image
+                                temp_json['image'] = request.scheme + '://' + request.get_host() + '/media/'+str(x.image)
 
                                 response_array.append(temp_json)
 
-                                response_json['past'] = response_array
+                                response_json['campaign_list'] = response_array
                                 response_json['success'] = True
                                 response_json['message'] = "List found"
 
@@ -88,11 +88,11 @@ def campaign(request):
                                 temp_json['name'] = x.name_hindi
                                 temp_json['date'] = x.date
                                 temp_json['description'] = x.description_hindi
-                                temp_json['image'] = x.image
+                                temp_json['image'] = request.scheme + '://' + request.get_host() + '/media/'+str(x.image)
 
                                 response_array.append(temp_json)
 
-                                response_json['past'] = response_array
+                                response_json['campaign_list'] = response_array
                                 response_json['success'] = True
                                 response_json['message'] = "List found"
 
@@ -112,11 +112,11 @@ def campaign(request):
                                 temp_json['name'] = x.name_hindi
                                 temp_json['date'] = x.date
                                 temp_json['description'] = x.description_hindi
-                                temp_json['image'] = x.image
+                                temp_json['image'] = request.scheme + '://' + request.get_host() + '/media/'+str(x.image)
 
                                 response_array.append(temp_json)
 
-                                response_json['past'] = response_array
+                                response_json['campaign_list'] = response_array
                                 response_json['success'] = True
                                 response_json['message'] = "List found"
 

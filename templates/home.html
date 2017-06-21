@@ -12,7 +12,7 @@
 
 <head>
 
-	<style type="text/css">
+    <style type="text/css">
 
 	.navbar-fixed nav {
     position: fixed;
@@ -33,78 +33,108 @@
 .tabs .indicator {
     
     background-color: #7FB069;
-    
 }
+
 </style>
 
 
-<script type="text/javascript">
+    <script type="text/javascript">
 
 
 	$(document).ready(function(){
-        $('ul.tabs').tabs();
         
     });
 
 
+    function tabStoryClick()
+    {
+
+        alert("stories");
+        $.ajax({
+            type: 'POST',
+            url : '/home/',
+            data: '',
+            
+            success: function(HTMLData){
+               $('#main_container').html(HTMLData);
+            }
+
+
+           });
+
+    }
+
+
+    function tabFeedClick()
+    {
+
+        alert("feedback");
+        $.ajax({
+            type: 'POST',
+            url : '/home/feedback/',
+            data: '',
+            
+            success: function(response) {
+               
+
+            },
+
+           });
+
+
+    }
+
+    function tabJoinClick()
+    {
+
+        alert("join us");
+        $.ajax({
+            type: 'POST',
+            url : '/home/joinus/',
+            data: '',
+            
+            
+           });
+
+
+    }
+
 
 </script>
 
-<div class="navbar-fixed " style="height:80px">		
-	<nav>
-	    <div class="nav-wrapper" style="background-color: #7FB069;">
-	        <a href="#" class="brand-logo"><img src="/media/pic/logo.png" alt="logo" style="height:90px;"/></a>
-	    </div>
-	</nav>
-</div>
+    <div class="navbar-fixed " style="height:80px">
+        <nav>
+            <div class="nav-wrapper" style="background-color: #7FB069;">
+                <a href="#" class="brand-logo"><img src="/media/pic/logo.png" alt="logo" style="height:90px;"/></a>
+            </div>
+        </nav>
+    </div>
 
 </head>
 <body>
 
 
-<div class="row">
-    <div class="col s12">
-      <ul class="tabs">
-        <li class="tab col s4"  style="overflow:hidden"><a href="#stories">Stories</a></li>
-        <li class="tab col s4"><a href="#feedback">Feedback</a></li>
-        <li class="tab col s4"><a href="#joinus">Join Us</a></li>
-      </ul>
-    </div>
-    <div id="stories" class="col s12 m12" style="max-width:100%">
+<ul id="tabs-swipe-demo" class="tabs">
+    <li class="tab col s3" ><a class="active" href="#stories" onclick="tabStoryClick()">Stories</a></li>
+    <li class="tab col s3"><a  href="#feedback" onclick="tabFeedClick()" >Feedback</a></li>
+    <li class="tab col s3"><a href="#joinus" onclick="tabJoinClick()" >Join Us</a></li>
+</ul>
 
-    	 <table id="product_table" class="responsive-table highlight bordered" style="background: #FFFFFF ">
-        <thead>
-        <tr>
-            <th style="width:5%">Id</th>
-            <th style="width:15%">Image</th>            
-            <th style="width:15%">Title</th>
-            <th style="width:50%">Description</th>
-            <th style="width:15%">Approv/Disapprov</th>
-            
-        </tr>
-        </thead>
-        <tbody onload="addRow()">
-         
-                <tr>
-                    <td style="width:5%">1</td>
-                    <td style="width:15%">image</td>
-                    <td style="width:15%">asasjdkajsakj</td>
-                    <td style="width:50%">saafaaaaaaaaaaaaaaaaaannnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</td>
-                    <td style="width:15%"><a class="waves-effect waves-light btn">button</a></td>
-                    
-                </tr>
-           
-        </tbody>
-    </table>
+<div id="stories" style="width:100%" class="col s12 ">
 
 
 
-    </div>
-    <div id="feedback" class="col s12">Feed back</div>
-    <div id="joinus" class="col s12">Join Us</div>
-  </div>
+<section id="content"   style="margin-top: -5px; overflow:hidden;">
+                    <div class="container" id="main_container" style="width: 100%">
+
+                    </div>
+                </section>
 
 
+
+</div>
+<div id="feedback" style="width:100%" class="col s12 ">Test 2</div>
+<div id="joinus"  style="width:100%" class="col s12 ">Test 3</div>
 
 
 </body>

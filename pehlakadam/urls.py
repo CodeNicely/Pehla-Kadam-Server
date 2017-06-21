@@ -16,7 +16,7 @@ Including another URLconf
 """
 
 import xadmin
-from django.conf.urls import url
+from django.conf.urls import url, include
 from django.contrib import admin
 from xadmin.plugins import xversion
 from campaign.views import campaign
@@ -33,12 +33,12 @@ from contact_us.views import contact_us
 from feedback.views import feedback
 from join_us.views import join_us
 from story.views import stories,like,share
-from admin_panel.views import home
+from dustbin.views import maps
 xversion.register_models()
 
 urlpatterns = [
     url(r'^admin/', xadmin.site.urls),
-    url(r'^home/',home),
+    url(r'^home/', include("admin_panel.urls")),
     url(r'^campaign/', campaign),
     url(r'^gallery_image/', gallery_image),
     url(r'^gallery_video/', gallery_video),
@@ -52,6 +52,7 @@ urlpatterns = [
     url(r'^contact_us/',contact_us),
     url(r'^feedback/',feedback),
     url(r'^join_us/',join_us),
+    url(r'^dustbin/',maps),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

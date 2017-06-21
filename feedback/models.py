@@ -9,5 +9,6 @@ class FeedbackData(models.Model):
     mobile = models.CharField(max_length=16, blank=False, null=False)
     name = models.CharField(max_length=240, blank=False, null=False)
     feedback = models.TextField(null=True,blank=True)
+    visibility = models.BooleanField(default=True)
 
     
