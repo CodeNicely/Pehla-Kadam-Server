@@ -1,0 +1,141 @@
+<html>
+
+
+<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link type="text/css" rel="stylesheet" href="/static/materialize/css/materialize.min.css"  media="screen,projection"/>
+<link href="/static/materialize/css/style.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+<link href="/static/materialize/css/materialize-font.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+<link href="/static/materialize/js/plugins/perfect-scrollbar/perfect-scrollbar.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="/static/materialize/js/materialize.min.js"></script>
+
+<head>
+
+    <style type="text/css">
+
+	.navbar-fixed nav {
+    position: fixed;
+    height: inherit;
+}
+
+
+.tabs .tab a {
+    color: #7FB069;
+
+
+}
+
+.tabs .tab a:hover {
+    color: #7FB069;
+}
+
+.tabs .indicator {
+    
+    background-color: #7FB069;
+}
+
+</style>
+
+
+    <script type="text/javascript">
+
+
+	$(document).ready(function(){
+        
+    });
+
+
+    function tabStoryClick()
+    {
+
+        alert("stories");
+        $.ajax({
+            type: 'POST',
+            url : '/home/',
+            data: '',
+            
+            success: function(HTMLData){
+               $('#main_container').html(HTMLData);
+            }
+
+
+           });
+
+    }
+
+
+    function tabFeedClick()
+    {
+
+        alert("feedback");
+        $.ajax({
+            type: 'POST',
+            url : '/home/feedback/',
+            data: '',
+            
+            success: function(response) {
+               
+
+            },
+
+           });
+
+
+    }
+
+    function tabJoinClick()
+    {
+
+        alert("join us");
+        $.ajax({
+            type: 'POST',
+            url : '/home/joinus/',
+            data: '',
+            
+            
+           });
+
+
+    }
+
+
+</script>
+
+    <div class="navbar-fixed " style="height:80px">
+        <nav>
+            <div class="nav-wrapper" style="background-color: #7FB069;">
+                <a href="#" class="brand-logo"><img src="/media/pic/logo.png" alt="logo" style="height:90px;"/></a>
+            </div>
+        </nav>
+    </div>
+
+</head>
+<body>
+
+
+<ul id="tabs-swipe-demo" class="tabs">
+    <li class="tab col s3" ><a class="active" href="#stories" onclick="tabStoryClick()">Stories</a></li>
+    <li class="tab col s3"><a  href="#feedback" onclick="tabFeedClick()" >Feedback</a></li>
+    <li class="tab col s3"><a href="#joinus" onclick="tabJoinClick()" >Join Us</a></li>
+</ul>
+
+<div id="stories" style="width:100%" class="col s12 ">
+
+
+
+<section id="content"   style="margin-top: -5px; overflow:hidden;">
+                    <div class="container" id="main_container" style="width: 100%">
+
+                    </div>
+                </section>
+
+
+
+</div>
+<div id="feedback" style="width:100%" class="col s12 ">Test 2</div>
+<div id="joinus"  style="width:100%" class="col s12 ">Test 3</div>
+
+
+</body>
+</html>
