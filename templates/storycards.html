@@ -1,0 +1,58 @@
+ 
+<script type="text/javascript">
+
+  $(document).ready(function() {
+                
+      
+
+  
+
+  });
+
+
+</script>
+
+<style type="text/css">
+
+
+.card .card-image img {
+    display: block;
+    border-radius: 2px 2px 0 0;
+    position: relative;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    height: 160px;
+    width: 250px;
+}
+
+
+
+</style>
+
+
+
+
+
+ <div class="row">
+  {% for story in story_list %}
+        <div class="col s12 m6 l4">
+          <div class="card" style="max-height:330px">
+            <div><center><span>{{story.user_data.name}}</span></center></div>
+            <div class="card-image">
+              <center><img src="{{story.image.url}}"></center>
+              <span class="card-title">{{story.title}}</span>
+            </div>
+            <div class="card-content">
+              <p>{{story.description}}</p>
+            </div>
+            <div class="card-action">
+              <center><a href="#">Accept</a></center>
+              <center><a href="#">Reject</a></center>
+            </div>
+          </div>
+        </div>
+        {%endfor%}
+      </div>
+
