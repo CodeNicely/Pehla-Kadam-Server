@@ -2,12 +2,35 @@
 <script type="text/javascript">
 
   $(document).ready(function() {
-                
-      
-
-  
+                 
 
   });
+
+  function changeStatus(flag)
+  {
+
+    var flag = flag;
+    
+    if (flag==1)
+    {
+
+        $.ajax({
+            type: 'POST',
+            url : '/home/change_status/',
+            data: {
+
+              'value': flag,
+
+            },
+            
+            
+
+           });
+
+    }
+
+
+  }
 
 
 </script>
@@ -26,8 +49,6 @@
     height: 160px;
     width: 250px;
 }
-
-
 
 </style>
 
@@ -48,8 +69,8 @@
               <p>{{story.description}}</p>
             </div>
             <div class="card-action">
-              <center><a href="#">Accept</a></center>
-              <center><a href="#">Reject</a></center>
+              <center><a href="#" onclick="changeStatus('1')">Accept</a></center>
+              <center><a href="#" onclick="changeStatus('-1')" >Reject</a></center>
             </div>
           </div>
         </div>
