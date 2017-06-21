@@ -7,7 +7,7 @@ from .models import *
 
 
 class JoinUsDataAdmin(object):
-    list_display = ["id","name","mobile","ward","description"]
+    list_display = ["id","description"]
 
 
 xadmin.site.register(JoinUsData,JoinUsDataAdmin)

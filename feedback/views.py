@@ -29,7 +29,7 @@ def feedback(request):
 				json = jwt.decode(str(access_token), str(KeysData.objects.get(key='jwt').value), algorithms=['HS256'])
 				mobile = str(json['mobile'])
 				user_row = UserData.objects.get(mobile= mobile)
-				feedback_create = FeedbackData.object.create(name=user_row.name,mobile=user_row.mobile,ward=user_row.ward,feedback=feedback_receive,visibility=True)
+				feedback_create = FeedbackData.object.create(user_data=user_row,feedback=feedback_receive,visibility=True)
 				response_json['success'] = True
 				response_json['message'] = 'Successful'
 			else:
@@ -75,14 +75,21 @@ def feedback_list(request):
 	response_json = {}
 	if request.method =='GET':
 		try :
+			print('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
 			feedlist = FeedbackData.objects.filter(visibility=True)
+			print('1.2')
 			response_json['list'] = feedlist
 			response_json['success'] = True
+			print('1.7')
 			template = get_template("feedbackitem.html")
+			print('2')
 			context = Context(response_json)
+			print('3')
 			html = template.render(context)
+			print('4')
 			return HttpResponse(html)
 		except Exception as e:
+			print(str(e))
 			template = get_template("error.html")
 			context = Context(response_json)
 			html = template.render(context)
@@ -94,4 +101,7 @@ def feedback_list(request):
 		return HttpResponse(html)
 
 
+@csrf_exempt
+def aman3(request):
+	return render(request,"home.html")
 	

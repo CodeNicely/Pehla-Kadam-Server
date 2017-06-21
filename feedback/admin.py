@@ -8,7 +8,7 @@ from .models import *
 
 # Register your models here.
 class FeedbackDataAdmin(object):
-    list_display = ["id","name","mobile","ward","feedback"]
+    list_display = ["id","feedback"]
 
 xadmin.site.register(FeedbackData,FeedbackDataAdmin)
 
