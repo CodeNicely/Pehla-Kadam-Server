@@ -35,14 +35,15 @@
     background-color: #7FB069;
 }
 
-</style>
+  </style>
 
 
     <script type="text/javascript">
 
 
 	$(document).ready(function(){
-        
+   
+       
     });
 
 
@@ -68,16 +69,15 @@
     function tabFeedClick()
     {
 
-        alert("feedback");
         $.ajax({
             type: 'POST',
-            url : '/home/feedback/',
+            url : '/feedback_list/',
             data: '',
             
-            success: function(response) {
-               
+            success: function(HTMLData) {
+                 $('#container_feedback').html(HTMLData); 
 
-            },
+            }
 
            });
 
@@ -87,11 +87,16 @@
     function tabJoinClick()
     {
 
-        alert("join us");
+       
         $.ajax({
             type: 'POST',
-            url : '/home/joinus/',
+            url : '/joinus_list/',
             data: '',
+
+             success: function(HTMLData) {
+                 $('#container_joinus').html(HTMLData); 
+
+             }
             
             
            });
@@ -124,7 +129,7 @@
 
 
 
-<section id="content"   style="margin-top: -5px; overflow:hidden;">
+<section id="content"   style="margin-top: 5px; overflow:hidden;">
                     <div class="container" id="main_container" style="width: 100%">
 
                     </div>
@@ -133,8 +138,23 @@
 
 
 </div>
-<div id="feedback" style="width:100%" class="col s12 ">Test 2</div>
-<div id="joinus"  style="width:100%" class="col s12 ">Test 3</div>
+<div id="feedback" style="width:100%" class="col s12 ">
+
+<section id="content"   style="margin-top: 5px; overflow:hidden;">
+                    <div class="container" id="container_feedback" style="width: 100%">
+
+                    </div>
+                </section>
+                </div>
+<div id="joinus"  style="width:100%" class="col s12 ">
+    <section id="content"   style="margin-top: 5px; overflow:hidden;">
+                    <div class="container" id="container_joinus" style="width: 100%">
+
+                    </div>
+                </section>
+
+
+</div>
 
 
 </body>

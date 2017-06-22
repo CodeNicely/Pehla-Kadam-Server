@@ -19,6 +19,7 @@ class UserData(models.Model):
     image = models.ImageField(upload_to='profile/', default='/media/profile/default.png' )
     modified = models.DateTimeField(auto_now=True, auto_now_add=False)
     created = models.DateTimeField(auto_now=False, auto_now_add=True)
+    email = models.CharField(max_length=150, blank=True, null = True)
 
     def __unicode__(self):
         return self.mobile

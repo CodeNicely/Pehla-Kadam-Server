@@ -80,6 +80,7 @@ def profile(request):
 			user_row = UserData.objects.get(mobile= mobile)
 			response_json['name'] = user_row.name
 			response_json['mobile'] = user_row.mobile
+			response_json['email'] = user_row.email
 			response_json['ward'] = user_row.ward
 			response_json['image'] = request.scheme + '://' + request.get_host() + '/media/' + str(user_row.image)
 			if lang_type == '1' :
@@ -112,6 +113,7 @@ def profile(request):
 			access_token1 = request.GET.get('access_token')
 			name = request.GET.get('name')
 			ward = request.GET.get('ward')
+			email = request.GET.get('email')
 			
 
 			access_token = str(access_token1)
@@ -120,6 +122,7 @@ def profile(request):
 			user_row = UserData.objects.get(mobile= mobile)
 			setattr(user_row,'name',name)
 			setattr(user_row,'ward',ward)
+			setattr(user_row,'email',email)
 			user_row.save()
 			try:
 				print("inside try")
