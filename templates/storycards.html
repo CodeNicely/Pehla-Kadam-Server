@@ -6,20 +6,23 @@
 
   });
 
-  function changeStatus(flag)
+  function changeStatus(flag,story_id)
   {
 
     var flag = flag;
-    
-    if (flag==1)
-    {
+
+    alert(flag);
+    alert(story_id);
+
 
         $.ajax({
             type: 'POST',
             url : '/home/change_status/',
             data: {
 
-              'value': flag,
+              'type': flag,
+              'story_id': story_id,
+
 
             },
             
@@ -27,7 +30,7 @@
 
            });
 
-    }
+
 
 
   }
@@ -63,14 +66,14 @@
             <div><center><span>{{story.user_data.name}}</span></center></div>
             <div class="card-image">
               <center><img src="{{story.image.url}}"></center>
-              <span class="card-title">{{story.title}}</span>
             </div>
+             <div><span class="card-title">{{story.title}}</span></div>
             <div class="card-content">
               <p>{{story.description}}</p>
             </div>
             <div class="card-action">
-              <center><a href="#" onclick="changeStatus('1')">Accept</a></center>
-              <center><a href="#" onclick="changeStatus('-1')" >Reject</a></center>
+              <center><a href="#" onclick="changeStatus('1','{{ story.id }}')">Accept</a></center>
+              <center><a href="#" onclick="changeStatus('-1','{{ story.id }}')" >Reject</a></center>
             </div>
           </div>
         </div>
