@@ -12,7 +12,7 @@ class ImageData(models.Model):
     image = models.ImageField(upload_to='media/gallery/images/')
     caption_english=models.CharField(max_length=120,null=True,blank=True)
     caption_hindi = models.CharField(max_length=120,null=True,blank=True)
-    campaign_id = models.ForeignKey(CampaignData,null=True)
+    campaign_id = models.ForeignKey(CampaignData,null=True,blank=True)
 
 
 class VideoData(models.Model):
@@ -20,5 +20,5 @@ class VideoData(models.Model):
     video = models.FileField(upload_to='media/gallery/video/')
     caption_english = models.CharField(max_length=120,null=True,blank=True)
     caption_hindi = models.CharField(max_length=120,null=True,blank=True)
-    campaign_id = models.ForeignKey(CampaignData,null=True)
+    campaign_id = models.ForeignKey(CampaignData,null=True,blank=True)
 
