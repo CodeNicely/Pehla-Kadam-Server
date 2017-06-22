@@ -20,7 +20,7 @@ from splash_screen.models import KeysData
 @csrf_exempt
 def feedback(request):
 	response_json = {}
-	if request.method == 'GET':
+	if request.method == 'POST':
 	
 		try:
 			access_token = request.GET.get('access_token')
