@@ -38,7 +38,9 @@ def welcome(request):
 					ward_list.append(ward_details)
 				response_json['ward_list'] = ward_list
 			if lang == '1':
+				print("English")
 				for o in WelcomeData.objects.all():
+
 					welcome_details = {'id': str(o.id),
 					'image': request.scheme + '://' + request.get_host() + '/media/' + str(o.image),
 					'quote': str(o.quote_hindi)
@@ -49,12 +51,12 @@ def welcome(request):
 				response_json['welcome_page'] = slider_list
 				for s in WardData.objects.all():
 					ward_details = {'id': int(s.id),
-					'name': str(o.ward_name_hindi)
+					'name': str(s.ward_name_hindi)
 
 					}
 					ward_list.append(ward_details)
 				response_json['ward_list'] = ward_list
-		except Exception(e):
+		except Exception as e:
 			print(e)
 			response_json['success'] = False
 			response_json['message'] = str(e)

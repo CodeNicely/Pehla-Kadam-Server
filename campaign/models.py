@@ -9,7 +9,7 @@ class CampaignData(models.Model):
 	id = models.AutoField(primary_key=True)
 	name_english = models.CharField(max_length=50,null=True,blank=True)
 	name_hindi = models.CharField(max_length=50,null=True,blank=True)
-	date = models.DateField(auto_now_add=True)
+	date = models.DateField()
 	venue_engilsh = models.CharField(max_length=120,null=True,blank=True)
 	venue_hindi = models.CharField(max_length=120,null=True ,blank=True)
 	description_english = models.TextField(null=True,blank=True)

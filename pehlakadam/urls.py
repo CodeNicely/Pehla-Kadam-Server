@@ -34,6 +34,7 @@ from feedback.views import feedback,feedback_visibility,feedback_list,aman3
 from join_us.views import join_us,joinus_visibility,joinus_list
 from story.views import stories,like,share
 from dustbin.views import maps
+from admin_panel.views import login_home,logout_user
 xversion.register_models()
 
 urlpatterns = [
@@ -60,6 +61,8 @@ urlpatterns = [
     url(r'^dustbin/',maps),
     url(r'^aman3/',aman3),
     url(r'^developer/',developer),
+    url(r'^login_home/',login_home),
+    url(r'^logout/',logout_user),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

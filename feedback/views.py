@@ -23,13 +23,13 @@ def feedback(request):
 	if request.method == 'POST':
 	
 		try:
-			access_token = request.GET.get('access_token')
-			feedback_receive = request.GET.get('feedback')
+			access_token = request.POST.get('access_token')
+			feedback_receive = request.POST.get('feedback')
 			if access_token is not None :
 				json = jwt.decode(str(access_token), str(KeysData.objects.get(key='jwt').value), algorithms=['HS256'])
 				mobile = str(json['mobile'])
 				user_row = UserData.objects.get(mobile= mobile)
-				feedback_create = FeedbackData.object.create(user_data=user_row,feedback=feedback_receive,visibility=True)
+				feedback_create = FeedbackData.objects.create(user_data=user_row,feedback=feedback_receive,visibility=True)
 				response_json['success'] = True
 				response_json['message'] = 'Successful'
 			else:
@@ -52,10 +52,16 @@ def feedback_visibility(request):
 	response_json = {}
 	if request.method == 'POST' :
 		try:
-			feed_id = request.POST.get('feedback_id')
+			print('aaa')
+			feed_id = request.POST.get('id')
+			print('dddd')
+			print(feed_id)
 			feed = FeedbackData.objects.get(id=feed_id)
+			print('dddd')
 			setattr(feed,'visibility',False)
+			print('aaa')
 			feed.save()
+			print('aaa')
 			response_json['success'] = True
 			response_json['message'] = 'Successful'
 		except Exception as e:
@@ -73,7 +79,7 @@ def feedback_visibility(request):
 @csrf_exempt
 def feedback_list(request):
 	response_json = {}
-	if request.method =='GET':
+	if request.method =='POST':
 		try :
 			print('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
 			feedlist = FeedbackData.objects.filter(visibility=True)
@@ -87,6 +93,7 @@ def feedback_list(request):
 			print('3')
 			html = template.render(context)
 			print('4')
+			print (feedlist)
 			return HttpResponse(html)
 		except Exception as e:
 			print(str(e))

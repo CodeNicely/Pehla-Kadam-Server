@@ -17,35 +17,54 @@ def about_us(request):
 			lang = request.GET.get('lang_type')
 			response_json = {}
 			if lang == '0':
-				detail_list = []
-				about_us_list =  AboutUsData.objects.all()
+				
+				about_us=  AboutUsData.objects.all()
+				about_team_list= AboutTheTeam.objects.all()
 				print('2')
-				for o in about_us_list:
-					detail={ }
-					detail['title']= o.title_english
-					detail['description'] = o.description_english
-					detail['image'] = request.scheme + '://' + request.get_host() + '/media/' + str(o.image)
-					detail_list.append(detail)
-				image_link = ImageData.objects.get(key='about_us').image
-				image = request.scheme + '://' + request.get_host() + '/media/' + str(image_link)
-				response_json['image'] = image
+				
+				response_json['introduction']= about_us.introduction_english
+				response_json['vision'] = about_us.vision_english
+				response_json['achievements'] = about_us.achievements_english
+				response_json['image'] = request.scheme + '://' + request.get_host() + '/media/' + str(o.image)
+				
+
+				team_array=[]
+				for x in about_team_list:
+					temp_json={}
+					temp_json['image']=request.scheme + '://' + request.get_host() + '/media/' + str(x.image)
+					temp_json['name']=x.name_english
+					temp_json['email']=x.email
+					temp_json['mobile']=x.mobile
+					team_array.append(temp_json)
+
+				response_json['about_us_list']=team_array
 				response_json['success'] = True
 				response_json['message'] = 'Successful'
-				response_json['about_us_list'] = detail_list
+				
 			if lang == '1':
-				detail_list = []
-				about_us_list =  AboutUsData.objects.all()
-				for o in about_us_list:
-					detail={ }
-					detail['title']= o.title_hindi
-					detail['description'] = o.description_hindi
-					detail_list.append(detail)
-				image_link = ImageData.objects.get(key='about_us').image
-				image = request.scheme + '://' + request.get_host() + '/media/' + str(o.image_link)
-				response_json['image'] = image
+
+				print("hindi")
+				about_us=  AboutUsData.objects.all()
+				about_team_list= AboutTheTeam.objects.all()
+
+				response_json['introduction']= about_us.introduction_hindi
+				response_json['vision'] = about_us.vision_hindi
+				response_json['achievements'] = about_us.achievements_hindi
+				response_json['image'] = request.scheme + '://' + request.get_host() + '/media/' + str(x.image)
+				
+
+				team_array=[]
+				for x in about_team_list:
+					temp_json={}
+					temp_json['image']=request.scheme + '://' + request.get_host() + '/media/' + str(x.image)
+					temp_json['name']=x.name_hindi
+					temp_json['email']=x.email
+					temp_json['mobile']=x.mobile
+					team_array.append(temp_json)
+
+				response_json['about_us_list']=team_array
 				response_json['success'] = True
 				response_json['message'] = 'Successful'
-				response_json['about_us_list'] = detail_list
 		except Exception as e:
 			print(e)
 			response_json['success'] = False

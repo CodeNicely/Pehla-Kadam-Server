@@ -35,7 +35,7 @@
     background-color: #264653;
 }
 
-</style>
+  </style>
 
 
     <script type="text/javascript">
@@ -43,8 +43,9 @@
 
 	$(document).ready(function(){
 
+
 	tabStoryClick();
-        
+
     });
 
 
@@ -68,16 +69,15 @@
     function tabFeedClick()
     {
 
-        alert("feedback");
         $.ajax({
             type: 'POST',
-            url : '/home/feedback/',
+            url : '/feedback_list/',
             data: '',
             
-            success: function(response) {
-               
+            success: function(HTMLData) {
+                 $('#container_feedback').html(HTMLData); 
 
-            },
+            }
 
            });
 
@@ -87,11 +87,16 @@
     function tabJoinClick()
     {
 
-        alert("join us");
+       
         $.ajax({
             type: 'POST',
-            url : '/home/joinus/',
+            url : '/joinus_list/',
             data: '',
+
+             success: function(HTMLData) {
+                 $('#container_joinus').html(HTMLData); 
+
+             }
             
             
            });
@@ -102,14 +107,7 @@
 
 </script>
 
-    <div class="navbar-fixed " style="height:80px">
-        <nav>
-            <div class="nav-wrapper" style="background-color: #11989E;">
-<!--                 <a href="#" class="brand-logo"><img src="/media/pic/logo.png" alt="logo" style="height:90px;"/></a>
- -->               <center><a style="font-size: 40px">एक कदम स्वच्छता की ओर...     </a></center>
-            </div>
-        </nav>
-    </div>
+{% include "header.html" %}
 
 </head>
 <body>
@@ -134,8 +132,23 @@
 
 
 </div>
-<div id="feedback" style="width:100%" class="col s12 ">Test 2</div>
-<div id="joinus"  style="width:100%" class="col s12 ">Test 3</div>
+<div id="feedback" style="width:100%" class="col s12 ">
+
+<section id="content"   style="margin-top: 5px; overflow:hidden;">
+                    <div class="container" id="container_feedback" style="width: 100%">
+
+                    </div>
+                </section>
+                </div>
+<div id="joinus"  style="width:100%" class="col s12 ">
+    <section id="content"   style="margin-top: 5px; overflow:hidden;">
+                    <div class="container" id="container_joinus" style="width: 100%">
+
+                    </div>
+                </section>
+
+
+</div>
 
 
 </body>
