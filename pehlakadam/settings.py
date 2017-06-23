@@ -88,8 +88,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'pehlakadam.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/1.9/ref/settings/#databases
+
 
 # DATABASES = {
 #     'default': {
@@ -109,15 +108,6 @@ DATABASES = {
 }
 
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'pehlakadamdb',
-#         'USER': 'pehla_kadam_admin',
-#         'PASSWORD': 'Password@123',
-#         'HOST': 'localhost',  # Or an IP Address that your DB is hosted on
-#     }
-# }
 
 
 
