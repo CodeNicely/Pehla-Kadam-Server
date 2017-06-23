@@ -27,7 +27,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.0.115','192.168.0.119','192.168.43.184','192.168.1.15']
+ALLOWED_HOSTS = ['192.168.0.115','192.168.0.119','192.168.43.184','192.168.1.15','pehlakadam.codenicely.in']
 
 
 # Application definition
@@ -97,6 +97,19 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'pehlakadamdb',
+#         'USER': 'pehla_kadam_admin',
+#         'PASSWORD': 'Password@123',
+#         'HOST': 'localhost',  # Or an IP Address that your DB is hosted on
+#     }
+# }
+
+
 
 
 # Password validation
