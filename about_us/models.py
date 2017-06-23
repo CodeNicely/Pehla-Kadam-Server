@@ -18,5 +18,5 @@ class AboutTheTeam(models.Model):
 	name_english=models.CharField(max_length=50,null=True,blank=True)
 	name_hindi=models.CharField(max_length=120,null=True,blank=True)
 	email=models.EmailField(null=True,blank=True)
-	mobile=models.IntegerField()
+	mobile=models.CharField(max_length=50,null=True,blank=True)
 	image=models.ImageField(upload_to='about_us/')
