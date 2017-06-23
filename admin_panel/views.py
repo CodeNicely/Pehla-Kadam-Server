@@ -2,7 +2,7 @@ import json
 from django.template import Context
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 # Create your views here.
 from story.models import StoryData
 from django.template.loader import get_template
@@ -23,8 +23,6 @@ def home_stories(request):
                     # temp_json['image']=story.image
                     # temp_json['title']=story.title
                     # temp_json['description']=story.description
-                    print story.image
-
                     response_array.append(story)
 
                 response_json['story_list']=response_array
@@ -60,6 +58,51 @@ def home_stories(request):
 
 
 
+
+@csrf_exempt
+def change_status(request):
+    if request.method == "POST":
+        response_json={}
+        try:
+            type = str(request.POST.get("type"))
+            story_id = str(request.POST.get("story_id"))
+
+            if type=='1':
+                try:
+                    obj = StoryData.objects.get(id=story_id)
+                    obj.approve=True
+                    obj.save()
+
+                    response_json['success']=True
+                    response_json['message']= "Story Approved"
+                except Exception as e:
+                    response_json['success'] = False
+                    response_json['message'] = "Failed"
+            elif type =='-1':
+                try:
+                    obj = StoryData.objects.get(id=story_id)
+                    obj.delete()
+
+                    response_json['success'] = True
+                    response_json['message'] = "Story Deleted"
+                except Exception as e:
+                    response_json['success'] = False
+                    response_json['message'] = "Failed"
+        except Exception as e:
+            response_json['success'] = False
+            response_json['message'] = "Story not found"
+
+        print(str(response_json))
+        return JsonResponse(response_json)
+
+
+
+
+
+
+
+
+
 @csrf_exempt
 def home_feedback(request):
 
@@ -73,4 +116,6 @@ def home_joinus(request):
 
     print "jooooooooooooooo"
     return render(request,"storycards.html")
+
+
 

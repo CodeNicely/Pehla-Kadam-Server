@@ -20,11 +20,14 @@ def stories(request):
     if request.method == "GET":
         try:
             print '1'
-            access_token = request.GET.get('access_token')
+            access_token = str(request.GET.get('access_token'))
             print access_token
-            json = jwt.decode(str(access_token),str(KeysData.objects.get(key='jwt').value), algorithms=['HS256'])
-            mobile = str(json['mobile'])
-            print mobile
+
+            if access_token is not '1':
+                json = jwt.decode(str(access_token),str(KeysData.objects.get(key='jwt').value), algorithms=['HS256'])
+                mobile = str(json['mobile'])
+                print mobile
+
 
             today = date.today()
             print 'today',today
@@ -63,8 +66,9 @@ def stories(request):
                     temp_json['likes']=x.likes
                     temp_json['shares']=x.shares
                     print '4'
-                    user1=UserData.objects.get(mobile=mobile)
+                    
                     try:
+                        user1=UserData.objects.get(mobile=mobile)
                         
                         o = UserLikeData.objects.get(user_id = user1, story_id = x)
                         print '5'
@@ -76,6 +80,7 @@ def stories(request):
                             print e
                             temp_json['liked'] = False
                     try:
+                        user1=UserData.objects.get(mobile=mobile)
                         q = UserShareData.objects.get(user_id = user1, story_id = x)
                         if q.shared == True:
                             temp_json['shared'] = True
@@ -96,6 +101,7 @@ def stories(request):
                 response_json['message'] = "Story list not created"
 
         except Exception as e:
+            print e
             response_json['success'] = False
             response_json['message'] = "Error"
 

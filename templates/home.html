@@ -21,18 +21,18 @@
 
 
 .tabs .tab a {
-    color: #7FB069;
+    color: #264653;
 
 
 }
 
 .tabs .tab a:hover {
-    color: #7FB069;
+    color: #264653;
 }
 
 .tabs .indicator {
     
-    background-color: #7FB069;
+    background-color: #264653;
 }
 
   </style>
@@ -42,20 +42,24 @@
 
 
 	$(document).ready(function(){
+<<<<<<< HEAD
    
        
+=======
+
+	tabStoryClick();
+        
+>>>>>>> ea43ee2bb31868da2cecb88493c8f9f53a9ea33c
     });
 
 
     function tabStoryClick()
     {
-
-        alert("stories");
         $.ajax({
             type: 'POST',
             url : '/home/',
             data: '',
-            
+
             success: function(HTMLData){
                $('#main_container').html(HTMLData);
             }
@@ -109,8 +113,9 @@
 
     <div class="navbar-fixed " style="height:80px">
         <nav>
-            <div class="nav-wrapper" style="background-color: #7FB069;">
-                <a href="#" class="brand-logo"><img src="/media/pic/logo.png" alt="logo" style="height:90px;"/></a>
+            <div class="nav-wrapper" style="background-color: #11989E;">
+<!--                 <a href="#" class="brand-logo"><img src="/media/pic/logo.png" alt="logo" style="height:90px;"/></a>
+ -->               <center><a style="font-size: 40px">एक कदम स्वच्छता की ओर...     </a></center>
             </div>
         </nav>
     </div>
