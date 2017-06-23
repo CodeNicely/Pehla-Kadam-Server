@@ -13,7 +13,6 @@ def home_stories(request):
     response_json={}
     data=''
     if request.method=="POST":
-        
         try:
             story_list = StoryData.objects.filter(approve=False)
             response_array=[]

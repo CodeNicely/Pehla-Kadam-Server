@@ -44,7 +44,10 @@ def campaign(request):
 
                             image_arr=[]
                             for image in image_list:
-                                image_arr.append(request.scheme + '://' + request.get_host() + '/media/'+str(image.image))
+                                image_json={}
+                                image_json['id']=image.id
+                                image_json['url']=request.scheme + '://' + request.get_host() + '/media/'+str(image.image)
+                                image_arr.append(image_json)
                                 print "_9__________"
 
 

@@ -20,10 +20,10 @@ def stories(request):
     if request.method == "GET":
         try:
             print '1'
-            access_token = int(request.GET.get('access_token'))
+            access_token = request.GET.get('access_token')
             print access_token
 
-            if access_token is not 1:
+            if access_token is not '1':
                 json = jwt.decode(str(access_token),str(KeysData.objects.get(key='jwt').value), algorithms=['HS256'])
                 mobile = str(json['mobile'])
                 print mobile
