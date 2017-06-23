@@ -6,7 +6,7 @@ from .models import *
 
 # Register your models here.
 class WelcomeDataAdmin(object):
-    list_display = ["id", "image", "quote_english", "quote_english"]
+    list_display = ["id", "image", "quote_english", "quote_hindi"]
 
 
 xadmin.site.register(WelcomeData,WelcomeDataAdmin)

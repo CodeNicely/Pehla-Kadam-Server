@@ -21,7 +21,7 @@ def login(request):
 	if request.method == 'GET':
 		for x, y in request.GET.items():
 			print("key,value", x, ":", y)
-		otp = randint(100000, 999999)
+		otp = randint(1000, 9999)
 		mobile = str(request.GET.get("mobile"))
 		message = "OTP for the App is " + str(otp)
 		send_sms1(mobile, message)
@@ -72,6 +72,7 @@ def profile(request):
 		for x, y in request.GET.items():
 			print("key,value", x, ":", y)
 		try:
+			ward_list=[]
 			access_token1 = request.GET.get('access_token')
 			lang_type = request.GET.get('lang_type')
 			access_token = str(access_token1)
@@ -82,18 +83,18 @@ def profile(request):
 			response_json['mobile'] = user_row.mobile
 			response_json['email'] = user_row.email
 			response_json['ward'] = user_row.ward
-			response_json['image'] = request.scheme + '://' + request.get_host() + '/media/' + str(user_row.image)
+			response_json['image'] = request.scheme + '://' + request.get_host() +"/"+ str(user_row.image)
 			if lang_type == '1' :
 				for s in WardData.objects.all():
 					ward_details = {'id': int(s.id),
-					'name': str(s.ward_name_hindi)
+					'name': str(s.ward_name_english)
 					}
 					ward_list.append(ward_details)
 				response_json['ward_list'] = ward_list
 			if lang_type == '0':
 				for s in WardData.objects.all():
 					ward_details = {'id': int(s.id),
-					'name': str(o.ward_name_hindi)
+					'name': str(s.ward_name_hindi)
 					}
 					ward_list.append(ward_details)
 				response_json['ward_list'] = ward_list

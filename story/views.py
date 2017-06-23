@@ -21,6 +21,7 @@ def stories(request):
         try:
             print '1'
             access_token = str(request.GET.get('access_token'))
+            
             print access_token
 
             if access_token is not '1':
@@ -273,11 +274,37 @@ def share(request):
 
     response_json={}
     if request.method =="POST":
-        access_token = request.POST.get('access_token')
-        json = jwt.decode(str(access_token), str(KeysData.objects.get(key='jwt').value), algorithms=['HS256'])
-        mobile = str(json['mobile'])
-        print mobile
+        access_token = str(request.POST.get('access_token'))
+        print access_token
+        print type(access_token)
+
         story_id = request.POST.get("story_id")
+
+
+        if access_token=='1':
+            print "_+_+_+_+_+_+_+"
+            story_data=StoryData.objects.get(id=story_id)
+            print story_data
+            s=int(story_data.shares)
+            print s
+            story_data.shares=s+1
+            story_data.save()
+            print "Done"
+            response_json['shared']=True
+            response_json['likes'] = story_data.likes
+            response_json['shares']=story_data.shares
+            response_json['story_id']=story_id
+            response_json['success']=True
+            response_json['message']="status updated"
+
+            return JsonResponse(response_json)
+
+
+        elif access_token is not '1':
+            json = jwt.decode(str(access_token), str(KeysData.objects.get(key='jwt').value), algorithms=['HS256'])
+            mobile = str(json['mobile'])
+            print mobile
+
 
         try:
             user = UserData.objects.get(mobile=mobile)

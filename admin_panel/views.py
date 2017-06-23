@@ -2,10 +2,13 @@ import json
 from django.template import Context
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse,HttpResponseRedirect
 # Create your views here.
 from story.models import StoryData
 from django.template.loader import get_template
+from django.contrib.auth import authenticate,logout
+from django.contrib.auth.models import User
+
 
 @csrf_exempt
 def home_stories(request):
@@ -13,7 +16,7 @@ def home_stories(request):
     response_json={}
     data=''
     if request.method=="POST":
-        
+                  
         try:
             story_list = StoryData.objects.filter(approve=False)
             response_array=[]
@@ -54,7 +57,13 @@ def home_stories(request):
 
 
     if request.method=="GET":
-        return render(request,"home.html")
+        try:
+            username=request.session.get('user')
+            user=User.objects.get(username=username)
+            return render(request,"home.html")
+        except Exception as e:
+            return HttpResponseRedirect("/login_home")
+
 
 
 
@@ -119,3 +128,33 @@ def home_joinus(request):
 
 
 
+
+@csrf_exempt
+def login_home(request):
+    if request.method=="GET":
+        if request.user.is_authenticated():
+            return render(request,"home.html")
+
+        else:
+            return render(request,"login.html")
+    if request.method=="POST":
+
+        username=request.POST.get("login_mobile")
+        password=request.POST.get("login_password")
+
+        user = authenticate(username=username, password=password)
+
+        if user is not None:
+            request.session['user']=username
+            return render(request,"home.html")
+        else:
+            return render(request,"login.html")
+
+
+
+@csrf_exempt
+def logout_user(request):
+
+    logout(request)
+
+    return HttpResponseRedirect("/login_home")
